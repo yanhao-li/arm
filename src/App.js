@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <h3>Arm</h3>
+      <h3>WebGL Robot Arm</h3>
       <canvas ref={canvasEl} width="800" height="600">
         Your browser does not support canvas
       </canvas>
