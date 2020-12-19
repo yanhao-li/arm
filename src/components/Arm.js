@@ -3,11 +3,9 @@ import Canvas from './Canvas'
 import { mat4, vec3 } from 'gl-matrix'
 import ArmVert from './shaders/arm.vert';
 import ArmFrag from './shaders/arm.frag';
-import { useCanvasContext } from '../CanvasContext';
 
 const Arm = () => {
 
-  // const { gl } = useCanvasContext();
 
   const camera = {
     position: vec3.set(vec3.create(), 6, 6, 4),
