@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-// import ArmVert from './components/shaders/arm.vert';
-// import ArmFrag from './components/shaders/arm.frag';
+import ArmVert from './components/shaders/arm.vert';
+import ArmFrag from './components/shaders/arm.frag';
 import './App.css';
 
 function App() {
@@ -15,22 +15,7 @@ function App() {
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
     const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 
-    const ArmVertex = [
-      'precision mediump float;',
-      'attribute vec2 vertPosition;',
-      'void main() {',
-        'gl_Position = vec4(vertPosition, 0.0, 1.0);',
-      '}'
-    ].join('\n');
-
-    const ArmFrag = [
-      'precision mediump float;',
-      'void main() {',
-        'gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);',
-      '}',
-    ].join('\n');
-
-    gl.shaderSource(vertexShader, ArmVertex);
+    gl.shaderSource(vertexShader, ArmVert);
     gl.shaderSource(fragmentShader, ArmFrag);
     gl.compileShader(vertexShader);
     gl.compileShader(fragmentShader);
