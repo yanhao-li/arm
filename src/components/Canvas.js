@@ -64,6 +64,7 @@ function Canvas() {
     
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
