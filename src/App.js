@@ -15,7 +15,7 @@ function App() {
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
     const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 
-    const vertexShaderText = [
+    const ArmVertex = [
       'precision mediump float;',
       'attribute vec2 vertPosition;',
       'void main() {',
@@ -23,15 +23,15 @@ function App() {
       '}'
     ].join('\n');
 
-    const fragmentShaderText = [
+    const ArmFrag = [
       'precision mediump float;',
       'void main() {',
         'gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);',
       '}',
     ].join('\n');
 
-    gl.shaderSource(vertexShader, vertexShaderText);
-    gl.shaderSource(fragmentShader, fragmentShaderText);
+    gl.shaderSource(vertexShader, ArmVertex);
+    gl.shaderSource(fragmentShader, ArmFrag);
     gl.compileShader(vertexShader);
     gl.compileShader(fragmentShader);
 
