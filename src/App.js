@@ -24,6 +24,7 @@ function App() {
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
     gl.linkProgram(program);
+
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error('ERROR Linking program!', gl.getProgramInfoLog(program));
       return;
@@ -45,16 +46,17 @@ function App() {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
     
-    const positionArrribLocation = gl.getAttribLocation(program, 'vertPosition');
+    const positionAttribLocation = gl.getAttribLocation(program, 'vertPosition');
+
     gl.vertexAttribPointer(
-      positionArrribLocation,
+      positionAttribLocation,
       2,
       gl.FLOAT, 
       gl.FALSE, 
       2 * Float32Array.BYTES_PER_ELEMENT, 
       0);
 
-    gl.enableVertexAttribArray(positionArrribLocation);
+    gl.enableVertexAttribArray(positionAttribLocation);
     
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
