@@ -1,13 +1,18 @@
 import { useEffect, useRef } from 'react';
 import ArmVert from './shaders/arm.vert';
 import ArmFrag from './shaders/arm.frag';
+import { useCanvasUpdateContext } from '../CanvasContext';
 
 function Canvas() {
   const canvasEl = useRef();
+  const updateCanvas = useCanvasUpdateContext();
 
   useEffect(() => {
     const canvas = canvasEl.current;
     const gl = canvas.getContext("webgl2");
+    updateCanvas({
+      gl: gl
+    });
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
