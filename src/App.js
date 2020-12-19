@@ -1,11 +1,11 @@
 import './App.css';
-import Canvas from './components/Canvas'
+import Arm from './components/Arm'
 
 function App() {
   return (
     <div className="App">
       <h3>WebGL Robot Arm</h3>
-      <Canvas />
+      <Arm />
     </div>
   );
 }

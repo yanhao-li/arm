@@ -62,12 +62,9 @@ function Canvas() {
   }, [])
 
   return (
-    <div className="App">
-      <h3>WebGL Robot Arm</h3>
-      <canvas ref={canvasEl} width="800" height="600">
-        Your browser does not support canvas
-      </canvas>
-    </div>
+    <canvas ref={canvasEl} width="800" height="600">
+      Your browser does not support canvas
+    </canvas>
   );
 }
 
