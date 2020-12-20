@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import Canvas from './Canvas'
 import { mat4, vec3 } from 'gl-matrix'
-import ArmVert from './shaders/arm.vert';
-import ArmFrag from './shaders/arm.frag';
+import vSource from './shaders/arm.vert';
+import fSource from './shaders/arm.frag';
 
 const Arm = () => {
 
@@ -15,30 +15,6 @@ const Arm = () => {
 
   const draw = (gl) => {
 
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-
-    gl.shaderSource(vertexShader, ArmVert);
-    gl.shaderSource(fragmentShader, ArmFrag);
-    gl.compileShader(vertexShader);
-    gl.compileShader(fragmentShader);
-
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('ERROR Linking program!', gl.getProgramInfoLog(program));
-      return;
-    }
-
-    gl.validateProgram(program);
-    if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
-      console.error('ERROR validating program!', gl.getProgramInfoLog(program));
-      return;
-    }
-
     const triangleVertices = [
       0.0, 0.5,
       -0.5, -0.5,
@@ -49,7 +25,7 @@ const Arm = () => {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
     
-    const positionAttribLocation = gl.getAttribLocation(program, 'vertPosition');
+    const positionAttribLocation = gl.getAttribLocation(gl.program, 'vertPosition');
 
     gl.vertexAttribPointer(
       positionAttribLocation,
@@ -61,12 +37,14 @@ const Arm = () => {
 
     gl.enableVertexAttribArray(positionAttribLocation);
     
-    gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
   return (
-    <Canvas onGlReady={draw}/>
+    <Canvas
+      onGlReady={draw}
+      vSource={vSource}
+      fSource={fSource}/>
   );
 }
 
