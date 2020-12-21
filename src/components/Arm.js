@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Canvas from './Canvas'
 import vSource from './shaders/arm.vert';
 import fSource from './shaders/arm.frag';
@@ -21,6 +21,11 @@ const Arm = () => {
 
   const { vertices, normals, indices } = scene;
 
+  const tick = (gl) => {
+    draw(gl, mouse);
+    requestAnimationFrame(() => tick(gl));
+  }
+
   // Will be called when canvas ready
   const init = (gl) => {
     setGl(gl);
@@ -29,7 +34,7 @@ const Arm = () => {
     // Set the clear color and enable the depth test
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
-    draw(gl, mouse);
+    tick(gl);
   }
 
   const handleMouseDown = (e) => {
