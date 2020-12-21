@@ -20,24 +20,13 @@ const Arm = () => {
   // Will be called when canvas ready
   const init = (gl) => {
     initShading(gl);
-    initBuffers({
+    initBuffers(
         gl,
-        isSplitMode: true,
-        program: gl.program,
-        verticesInfo: [
-            {
-                attrVar: 'a_Position',
-                vertice: vertices,
-                size: 3
-            },
-            {
-                attrVar: 'a_Normal',
-                vertice: normals,
-                size: 3
-            },
-        ],
+        gl.program,
+        vertices,
+        normals,
         indices
-    });
+    );
 
     // Set the clear color and enable the depth test
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
