@@ -93,19 +93,20 @@ const drawPalm = () => {
   matrixContext.save(modelMatrix);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 2, palmLength, 6));
   drawBox(matrix);
-  
-  // Move to the center of the tip of the palm
-  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, palmLength, 0.0));
   return matrixContext.restore();
 }
 
 const drawFinger1 = () => {
   const modelMatrix = matrix.model;
+  // Move to the center of the tip of the palm
+  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, palmLength, 0.0));
+
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, fingerLength));
   mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * angle.joint3);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 1, fingerLength, 1));
   drawBox(matrix);
+  
   return matrixContext.restore();
 }
 
