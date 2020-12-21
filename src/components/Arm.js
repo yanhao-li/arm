@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Canvas from './Canvas'
-import { mat4 } from 'gl-matrix'
 import vSource from './shaders/arm.vert';
 import fSource from './shaders/arm.frag';
 import { initBuffers } from 'utils/buffers';
@@ -30,11 +29,12 @@ const Arm = () => {
     // Set the clear color and enable the depth test
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
-    draw(gl);
+    draw(gl, mouse);
   }
 
   const handleMouseDown = (e) => {
     setMouse({
+      ...mouse,
       isDragging: true,
       lastX: e.clientX,
       lastY: e.clientY

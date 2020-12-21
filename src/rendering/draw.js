@@ -13,7 +13,9 @@ const angle = {
   joint3: 0
 };
 
-const drawBox = (gl, { matrix }) => {
+let gl;
+
+const drawBox = (matrix) => {
   const near = 1, far = 300;
   const { camera } = scene;
   const { canvas } = gl;
@@ -48,71 +50,73 @@ const arm2Length = 10.0;
 const palmLength = 2.0;
 const fingerLength = 2;
 
-const drawBase = ({ gl, matrix }) => {
+const drawBase = (matrix, mouse) => {
   const modelMatrix = matrix.model;
   mat4.fromTranslation(modelMatrix, vec3.set(vec3.create(), 0, -12, 0));
-  // mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * deltaXAngle);  // Rotation around x-axis
-  // mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * deltaYAngle);  // Rotation around y-axis
+  mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * mouse.deltaXAngle);  // Rotation around x-axis
+  mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * mouse.deltaYAngle);  // Rotation around y-axis
   matrixContext.save(modelMatrix);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 10, baseHeight, 10));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   return matrixContext.restore();
 }
 
-const drawArm1 = ({ gl, matrix }) => {
+const drawArm1 = (matrix) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, baseHeight, 0.0));  // Move onto the base
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.arm1);
   matrixContext.save(modelMatrix);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 3, arm1Length, 3));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   return matrixContext.restore();
 }
 
-const drawArm2 = ({ gl, matrix }) => {
+const drawArm2 = (matrix) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm1Length, 0.0));
   mat4.rotateZ(modelMatrix, modelMatrix, Math.PI/180 * angle.joint1);
   matrixContext.save(modelMatrix);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 4, arm2Length, 4));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   return matrixContext.restore();
 }
 
-const drawPalm = ({ gl, matrix }) => {
+const drawPalm = (matrix) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm2Length, 0.0));
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.joint2);
   matrixContext.save(modelMatrix);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 2, palmLength, 6));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   
   // Move to the center of the tip of the palm
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, palmLength, 0.0));
   return matrixContext.restore();
 }
 
-const drawFinger1 = ({ gl, matrix }) => {
+const drawFinger1 = (matrix) => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, fingerLength));
   mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * angle.joint3);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 1, fingerLength, 1));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   return matrixContext.restore();
 }
 
-const drawFinger2 = ({ gl, matrix }) => {
+const drawFinger2 = (matrix) => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, -fingerLength));
   mat4.rotateX(modelMatrix, modelMatrix, -Math.PI/180 * angle.joint3);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 1, fingerLength, 1));
-  drawBox(gl, { matrix });
+  drawBox(matrix);
   return matrixContext.restore();
 }
 
-const draw = (gl) => {
+const draw = (g, mouse) => {
+  gl = g;
+
   const matrix = {
     model: mat4.create(),
     mvp: mat4.create()
@@ -120,12 +124,12 @@ const draw = (gl) => {
 
   // Clear color and depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  matrix.model = drawBase({gl, matrix});
-  matrix.model = drawArm1({gl, matrix});
-  matrix.model = drawArm2({gl, matrix});
-  matrix.model = drawPalm({gl, matrix});
-  matrix.model = drawFinger1({gl, matrix});
-  matrix.model = drawFinger2({gl, matrix});
+  matrix.model = drawBase(matrix, mouse);
+  matrix.model = drawArm1(matrix);
+  matrix.model = drawArm2(matrix);
+  matrix.model = drawPalm(matrix);
+  matrix.model = drawFinger1(matrix);
+  matrix.model = drawFinger2(matrix);
 }
 
 export default draw;
