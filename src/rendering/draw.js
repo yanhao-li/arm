@@ -1,7 +1,7 @@
 import { mat4, vec3 } from 'gl-matrix';
-import { compose } from './helpers';
-import MatrixContext from './MatrixContext';
-import scene from '../scene';
+import { compose } from 'utils/helpers';
+import MatrixContext from 'utils/MatrixContext';
+import scene from 'scene';
 
 const matrixContext = new MatrixContext();
 
