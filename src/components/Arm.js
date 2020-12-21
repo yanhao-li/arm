@@ -99,15 +99,47 @@ const Arm = () => {
         break;
       // r
       case 82:
+        setAngle(prevState => {
+          return {
+            ...prevState,
+            joint2: prevState.joint2 + prevState.step
+          }
+        })
         break;
       // e
       case 69:
+        setAngle(prevState => {
+          return {
+            ...prevState,
+            joint2: prevState.joint2 - prevState.step
+          }
+        })
         break;
       // a
       case 65:
+        setAngle(prevState => {
+          if (prevState.joint3 < 60) {
+            return {
+              ...prevState,
+              joint3: prevState.joint3 + prevState.step
+            }
+          } else {
+            return prevState
+          }
+        })
         break;
       // s
       case 83:
+        setAngle(prevState => {
+          if (prevState.joint3 > -60) {
+            return {
+              ...prevState,
+              joint3: prevState.joint3 - prevState.step
+            }
+          } else {
+            return prevState
+          }
+        })
         break;
       default:
         break;
