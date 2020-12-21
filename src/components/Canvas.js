@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { initShader } from "utils/shaders";
+import { initShader } from "../utils/shaders";
 
 const Canvas = ({
   onGlReady,

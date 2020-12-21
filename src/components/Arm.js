@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import Canvas from './Canvas'
 import vSource from './shaders/arm.vert';
 import fSource from './shaders/arm.frag';
-import { initBuffers } from 'utils/buffers';
+import { initBuffers } from '../utils/buffers';
 import scene from '../scene';
-import draw from 'rendering/draw'
+import draw from '../rendering/draw'
 import { initShading } from '../rendering/shading';
 
 const Arm = () => {
