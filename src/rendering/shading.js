@@ -7,8 +7,8 @@ const initShading = (gl) => {
   const u_LightPosition = gl.getUniformLocation(gl.program, 'u_LightPosition');
   const u_AmbientLightColor = gl.getUniformLocation(gl.program, 'u_AmbientLightColor');
   const lightDirection = vec3.normalize(vec3.create(), vec3.set(vec3.create(), 1, 0.5, 1.2));
-  gl.vertexAttrib3f(a_Color, 1, 1, 1);
-  gl.uniform3f(u_AmbientLightColor, 0.1, 0.1, 0.1);
+  gl.vertexAttrib3f(a_Color, 0.3, 0.3, 0.3);
+  gl.uniform3f(u_AmbientLightColor, 1, 1, 1);
   gl.uniform3f(u_LightColor, 1, 1, 1);
   gl.uniform3fv(u_LightDirection, lightDirection);
   gl.uniform3f(u_LightPosition, 2.3, 4.0, 3.5);

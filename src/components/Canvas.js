@@ -18,7 +18,7 @@ const Canvas = ({
 
     initShader({ gl, vSource, fSource })
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(1, 1, 1, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     onGlReady(gl);
 

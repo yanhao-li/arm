@@ -43,7 +43,7 @@ const Arm = () => {
     initShading(gl);
     initBuffers(gl, gl.program, vertices, normals, indices);
     // Set the clear color and enable the depth test
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(1, 1, 1, 1.0);
     gl.enable(gl.DEPTH_TEST);
     document.addEventListener("keydown", handleKeyDown);
   }

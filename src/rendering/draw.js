@@ -81,7 +81,7 @@ const drawPalm = (angle) => {
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm2Length, 0.0));
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.joint2);
   matrixContext.save(modelMatrix);
-  mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 2, palmLength, 7));
+  mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 2, palmLength, 6));
   drawBox(matrix);
   return matrixContext.restore();
 }
@@ -92,7 +92,7 @@ const drawFinger1 = (angle) => {
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, palmLength, 0.0));
 
   matrixContext.save(modelMatrix);
-  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, fingerLength));
+  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, fingerLength - 0.5));
   mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * angle.joint3);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0.5, fingerLength, 0.5));
   drawBox(matrix);
@@ -103,7 +103,7 @@ const drawFinger1 = (angle) => {
 const drawFinger2 = (angle) => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
-  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, -fingerLength));
+  mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, -fingerLength + 0.5));
   mat4.rotateX(modelMatrix, modelMatrix, -Math.PI/180 * angle.joint3);
   mat4.scale(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0.5, fingerLength, 0.5));
   drawBox(matrix);

@@ -10,7 +10,7 @@ import { vec3 } from 'gl-matrix'
 //  v2------v3
 
 const camera = {
-  position: vec3.set(vec3.create(), 30, 20, 40),
+  position: vec3.set(vec3.create(), 25, 15, 30),
   gaze_direction: vec3.set(vec3.create(), 0, 0, -1),
   up_direction: vec3.set(vec3.create(), 0, 1, 0)
 };
@@ -39,14 +39,14 @@ const normals = new Float32Array([    // Normal
   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,  // v7-v4-v3-v2 down
   0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0   // v4-v7-v6-v5 back
 ]);
-// Indices of the vertices
+
 const indices = new Uint8Array([
-  0, 1, 2,   0, 2, 3,    // front
-  4, 5, 6,   4, 6, 7,    // right
-  8, 9,10,   8,10,11,    // up
-  12,13,14,  12,14,15,    // left
-  16,17,18,  16,18,19,    // down
-  20,21,22,  20,22,23     // back
+  0, 1, 2,   0, 2, 3,
+  4, 5, 6,   4, 6, 7,
+  8, 9,10,   8,10,11,
+  12,13,14,  12,14,15,
+  16,17,18,  16,18,19,
+  20,21,22,  20,22,23
 ]);
 
 const scene = {
