@@ -10,14 +10,6 @@ let matrix = {
   mvp: mat4.create()
 };
 
-const angle = {
-  step: 3.0,
-  arm1: 90,
-  joint1: 45.0,
-  joint2: 0,
-  joint3: 0
-};
-
 let gl;
 
 const drawBox = (matrix) => {
@@ -66,7 +58,7 @@ const drawBase = (mouse) => {
   return matrixContext.restore();
 }
 
-const drawArm1 = () => {
+const drawArm1 = (angle) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, baseHeight, 0.0));  // Move onto the base
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.arm1);
@@ -76,7 +68,7 @@ const drawArm1 = () => {
   return matrixContext.restore();
 }
 
-const drawArm2 = () => {
+const drawArm2 = (angle) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm1Length, 0.0));
   mat4.rotateZ(modelMatrix, modelMatrix, Math.PI/180 * angle.joint1);
@@ -86,7 +78,7 @@ const drawArm2 = () => {
   return matrixContext.restore();
 }
 
-const drawPalm = () => {
+const drawPalm = (angle) => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm2Length, 0.0));
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.joint2);
@@ -96,7 +88,7 @@ const drawPalm = () => {
   return matrixContext.restore();
 }
 
-const drawFinger1 = () => {
+const drawFinger1 = (angle) => {
   const modelMatrix = matrix.model;
   // Move to the center of the tip of the palm
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, palmLength, 0.0));
@@ -110,7 +102,7 @@ const drawFinger1 = () => {
   return matrixContext.restore();
 }
 
-const drawFinger2 = () => {
+const drawFinger2 = (angle) => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, -fingerLength));
@@ -120,17 +112,17 @@ const drawFinger2 = () => {
   return matrixContext.restore();
 }
 
-const draw = (g, mouse) => {
+const draw = (g, mouse, angle) => {
   gl = g;
 
   // Clear color and depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   matrix.model = drawBase(mouse);
-  matrix.model = drawArm1();
-  matrix.model = drawArm2();
-  matrix.model = drawPalm();
-  matrix.model = drawFinger1();
-  matrix.model = drawFinger2();
+  matrix.model = drawArm1(angle);
+  matrix.model = drawArm2(angle);
+  matrix.model = drawPalm(angle);
+  matrix.model = drawFinger1(angle);
+  matrix.model = drawFinger2(angle);
 }
 
 export default draw;

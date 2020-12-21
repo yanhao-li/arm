@@ -17,21 +17,25 @@ const Arm = () => {
     deltaYAngle: 0
   });
 
+  const [ angle, setAngle ] = useState({
+    step: 3.0,
+    arm1: 90,
+    joint1: 45.0,
+    joint2: 0,
+    joint3: 0
+  });
+
   const requestRef = useRef();
 
   const [gl, setGl] = useState(null);
 
   const { vertices, normals, indices } = scene;
 
-  const tick = (gl, mouse) => {
-    draw(gl, mouse);
-  }
-
   useEffect(() => {
     if (gl) {
-      requestRef.current = requestAnimationFrame(() => tick(gl, mouse));
+      requestRef.current = requestAnimationFrame(() => draw(gl, mouse, angle));
     }
-  }, [mouse, gl])
+  }, [mouse, gl, angle])
 
   // Will be called when canvas ready
   const init = (gl) => {
@@ -42,24 +46,56 @@ const Arm = () => {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
     document.addEventListener("keydown", handleKeyDown);
-    requestAnimationFrame(() => tick(gl, mouse));
   }
 
   const handleKeyDown = (e) => {
     e.preventDefault();
+    const maxAngle = 120;
     const { keyCode } = e;
     switch (keyCode) {
       // up arrow
       case 38:
+        setAngle(prevState => {
+          if (prevState.joint1 > -maxAngle) {
+            return {
+              ...prevState,
+              joint1: prevState.joint1 - prevState.step
+            }
+          } else {
+            return prevState
+          }
+        })
         break;
       // down arrow
       case 40:
+        setAngle(prevState => {
+          if (prevState.joint1 < maxAngle) {
+            return {
+              ...prevState,
+              joint1: prevState.joint1 + prevState.step
+            }
+          } else {
+            return prevState
+          }
+        })
         break;
       // right arrow
       case 39:
+        setAngle(prevState => {
+          return {
+            ...prevState,
+            arm1: prevState.arm1 + prevState.step
+          }
+        })
         break;
       // left arrow
       case 37:
+        setAngle(prevState => {
+          return {
+            ...prevState,
+            arm1: prevState.arm1 - prevState.step
+          }
+        })
         break;
       // r
       case 82:
