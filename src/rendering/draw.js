@@ -66,7 +66,7 @@ const drawBase = (mouse) => {
   return matrixContext.restore();
 }
 
-const drawArm1 = (matrix) => {
+const drawArm1 = () => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, baseHeight, 0.0));  // Move onto the base
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.arm1);
@@ -76,7 +76,7 @@ const drawArm1 = (matrix) => {
   return matrixContext.restore();
 }
 
-const drawArm2 = (matrix) => {
+const drawArm2 = () => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm1Length, 0.0));
   mat4.rotateZ(modelMatrix, modelMatrix, Math.PI/180 * angle.joint1);
@@ -86,7 +86,7 @@ const drawArm2 = (matrix) => {
   return matrixContext.restore();
 }
 
-const drawPalm = (matrix) => {
+const drawPalm = () => {
   const modelMatrix = matrix.model;
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, arm2Length, 0.0));
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * angle.joint2);
@@ -99,7 +99,7 @@ const drawPalm = (matrix) => {
   return matrixContext.restore();
 }
 
-const drawFinger1 = (matrix) => {
+const drawFinger1 = () => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, fingerLength));
@@ -109,7 +109,7 @@ const drawFinger1 = (matrix) => {
   return matrixContext.restore();
 }
 
-const drawFinger2 = (matrix) => {
+const drawFinger2 = () => {
   const modelMatrix = matrix.model;
   matrixContext.save(modelMatrix);
   mat4.translate(modelMatrix, modelMatrix, vec3.set(vec3.create(), 0, 0, -fingerLength));
@@ -125,11 +125,11 @@ const draw = (g, mouse) => {
   // Clear color and depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   matrix.model = drawBase(mouse);
-  matrix.model = drawArm1(matrix);
-  matrix.model = drawArm2(matrix);
-  matrix.model = drawPalm(matrix);
-  matrix.model = drawFinger1(matrix);
-  matrix.model = drawFinger2(matrix);
+  matrix.model = drawArm1();
+  matrix.model = drawArm2();
+  matrix.model = drawPalm();
+  matrix.model = drawFinger1();
+  matrix.model = drawFinger2();
 }
 
 export default draw;
