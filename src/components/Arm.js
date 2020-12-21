@@ -67,8 +67,8 @@ const Arm = () => {
         ...mouse,
         lastX: e.clientX,
         lastY: e.clientY,
-        deltaXAngle: mouse.deltaXAngle + factor * (e.clientX - mouse.lastX),
-        deltaYAngle: mouse.deltaYAngle + factor * (e.clientY - mouse.lastY)
+        deltaXAngle: mouse.deltaXAngle + factor * (e.clientY - mouse.lastY),
+        deltaYAngle: mouse.deltaYAngle + factor * (e.clientX - mouse.lastX)
       })
     }
   }
@@ -79,6 +79,7 @@ const Arm = () => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseUp}
       vSource={vSource}
       fSource={fSource}/>
   );

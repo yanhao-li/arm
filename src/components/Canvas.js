@@ -7,7 +7,8 @@ const Canvas = ({
   fSource,
   onMouseUp,
   onMouseDown,
-  onMouseMove
+  onMouseMove,
+  onMouseLeave
 }) => {
   const canvasEl = useRef();
 
@@ -32,6 +33,7 @@ const Canvas = ({
       onMouseUp={onMouseUp}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
     >
       Your browser does not support canvas
     </canvas>
