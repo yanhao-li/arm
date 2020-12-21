@@ -29,21 +29,3 @@ export const initShader = ({gl, vSource, fSource}) => {
   gl.useProgram(program);
   gl.program = program;
 }
-
-export const initBuffers = ({ gl, verticesData, program, indices }) => {
-  verticesData.forEach(data => {
-    const { attrVar, size, stride = 0, offset = 0, vertices } = data;
-    const attrLoc = gl.getAttribLocation(program, attrVar);
-    
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-    gl.vertexAttribPointer(attrLoc, size, gl.FLOAT, false, stride, offset);
-    gl.enableVertexAttribArray(attrLoc);
-  });
-
-  if (indices) {
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
-  }
-}
