@@ -27,8 +27,8 @@ const Canvas = ({
   return (
     <canvas
       ref={canvasEl}
-      width="800"
-      height="600"
+      width="400"
+      height="400"
       onMouseUp={onMouseUp}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}

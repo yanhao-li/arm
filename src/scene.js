@@ -10,7 +10,7 @@ import { vec3 } from 'gl-matrix'
 //  v2------v3
 
 const camera = {
-  position: vec3.set(vec3.create(), 6, 6, 4),
+  position: vec3.set(vec3.create(), 20, 10, 30),
   gaze_direction: vec3.set(vec3.create(), 0, 0, 0),
   up_direction: vec3.set(vec3.create(), 0, 1, 0)
 };

@@ -5,6 +5,11 @@ import scene from 'scene';
 
 const matrixContext = new MatrixContext();
 
+let matrix = {
+  model: mat4.create(),
+  mvp: mat4.create()
+};
+
 const angle = {
   step: 3.0,
   arm1: 90,
@@ -50,8 +55,8 @@ const arm2Length = 10.0;
 const palmLength = 2.0;
 const fingerLength = 2;
 
-const drawBase = (matrix, mouse) => {
-  const modelMatrix = matrix.model;
+const drawBase = (mouse) => {
+  let {model: modelMatrix} = matrix;
   mat4.fromTranslation(modelMatrix, vec3.set(vec3.create(), 0, -12, 0));
   mat4.rotateX(modelMatrix, modelMatrix, Math.PI/180 * mouse.deltaXAngle);  // Rotation around x-axis
   mat4.rotateY(modelMatrix, modelMatrix, Math.PI/180 * mouse.deltaYAngle);  // Rotation around y-axis
@@ -117,14 +122,9 @@ const drawFinger2 = (matrix) => {
 const draw = (g, mouse) => {
   gl = g;
 
-  const matrix = {
-    model: mat4.create(),
-    mvp: mat4.create()
-  };
-
   // Clear color and depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  matrix.model = drawBase(matrix, mouse);
+  matrix.model = drawBase(mouse);
   matrix.model = drawArm1(matrix);
   matrix.model = drawArm2(matrix);
   matrix.model = drawPalm(matrix);
