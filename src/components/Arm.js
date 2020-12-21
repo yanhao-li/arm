@@ -118,7 +118,7 @@ const Arm = () => {
       // a
       case 65:
         setAngle(prevState => {
-          if (prevState.joint3 < 60) {
+          if (prevState.joint3 < 30) {
             return {
               ...prevState,
               joint3: prevState.joint3 + prevState.step
@@ -131,7 +131,7 @@ const Arm = () => {
       // s
       case 83:
         setAngle(prevState => {
-          if (prevState.joint3 > -60) {
+          if (prevState.joint3 > -30) {
             return {
               ...prevState,
               joint3: prevState.joint3 - prevState.step
