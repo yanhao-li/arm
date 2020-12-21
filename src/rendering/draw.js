@@ -112,11 +112,20 @@ const drawFinger2 = ({ gl, matrix }) => {
   return matrixContext.restore();
 }
 
-export {
-  drawBase,
-  drawArm1,
-  drawArm2,
-  drawPalm,
-  drawFinger1,
-  drawFinger2
-};
+const draw = (gl) => {
+  const matrix = {
+    model: mat4.create(),
+    mvp: mat4.create()
+  };
+
+  // Clear color and depth buffer
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  matrix.model = drawBase({gl, matrix});
+  matrix.model = drawArm1({gl, matrix});
+  matrix.model = drawArm2({gl, matrix});
+  matrix.model = drawPalm({gl, matrix});
+  matrix.model = drawFinger1({gl, matrix});
+  matrix.model = drawFinger2({gl, matrix});
+}
+
+export default draw;
