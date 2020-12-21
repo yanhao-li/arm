@@ -18,10 +18,13 @@ const Arm = () => {
     deltaYAngle: 0
   });
 
+  const [gl, setGl] = useState(null);
+
   const { vertices, normals, indices } = scene;
 
   // Will be called when canvas ready
   const init = (gl) => {
+    setGl(gl);
     initShading(gl);
     initBuffers(gl, gl.program, vertices, normals, indices);
     // Set the clear color and enable the depth test
@@ -30,12 +33,32 @@ const Arm = () => {
     draw(gl);
   }
 
-  const handleMouseUp = () => {
-
+  const handleMouseDown = (e) => {
+    setMouse({
+      isDragging: true,
+      lastX: e.clientX,
+      lastY: e.clientY
+    })
   }
 
-  const handleMouseDown = () => {
-    
+  const handleMouseUp = () => {
+    setMouse({
+      ...mouse,
+      isDragging: false
+    });
+  }
+
+  const handleMouseMove = (e) => {
+    if (mouse.isDragging) {
+      const factor = 100 / gl.canvas.height;
+      setMouse({
+        ...mouse,
+        lastX: e.clientX,
+        lastY: e.clientY,
+        deltaXAngle: mouse.deltaXAngle + factor * (e.clientX - mouse.lastX),
+        deltaYAngle: mouse.deltaYAngle + factor * (e.clientY - mouse.lastY)
+      })
+    }
   }
 
   return (
@@ -43,6 +66,7 @@ const Arm = () => {
       onGlReady={init}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
       vSource={vSource}
       fSource={fSource}/>
   );

@@ -1,7 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { initShader } from "utils/shaders";
 
-const Canvas = ({onGlReady, vSource, fSource}) => {
+const Canvas = ({
+  onGlReady,
+  vSource,
+  fSource,
+  onMouseUp,
+  onMouseDown,
+  onMouseMove
+}) => {
   const canvasEl = useRef();
 
   useEffect(() => {
@@ -18,7 +25,14 @@ const Canvas = ({onGlReady, vSource, fSource}) => {
   }, [])
 
   return (
-    <canvas ref={canvasEl} width="800" height="600">
+    <canvas
+      ref={canvasEl}
+      width="800"
+      height="600"
+      onMouseUp={onMouseUp}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+    >
       Your browser does not support canvas
     </canvas>
   );
