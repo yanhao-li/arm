@@ -11,7 +11,7 @@ import { vec3 } from 'gl-matrix'
 
 const camera = {
   position: vec3.set(vec3.create(), 20, 10, 30),
-  gaze_direction: vec3.set(vec3.create(), 0, 0, 0),
+  gaze_direction: vec3.set(vec3.create(), 0, 0, -1),
   up_direction: vec3.set(vec3.create(), 0, 1, 0)
 };
 
@@ -24,12 +24,12 @@ const vertices = new Float32Array([   // Coordinates
   0.5, 0.0,-0.5, -0.5, 0.0,-0.5, -0.5, 1.0,-0.5,  0.5, 1.0,-0.5  // v4-v7-v6-v5 back
 ]);
 const colors = new Float32Array([    // Colors
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0,     // v0-v1-v2-v3 front
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0,     // v0-v3-v4-v5 right
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0,     // v0-v5-v6-v1 up
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0,     // v1-v6-v7-v2 left
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0,     // v7-v4-v3-v2 down
-  1, 0.4, 0,   1, 0.4, 0,   1, 0.4, 0,  1, 0.4, 0　    // v4-v7-v6-v5 back
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v1-v2-v3 front
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v3-v4-v5 right
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v5-v6-v1 up
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v1-v6-v7-v2 left
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v7-v4-v3-v2 down
+  1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0　    // v4-v7-v6-v5 back
 ]);
 const normals = new Float32Array([    // Normal
   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,  // v0-v1-v2-v3 front

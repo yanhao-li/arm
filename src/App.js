@@ -7,6 +7,8 @@ function App() {
     <div className="App">
       <h3>WebGL Robot Arm</h3>
       <ul>
+        <li>Drag to adjust viewport</li>
+        <br />
         <li><kbd>E</kbd>: Rotate the palm clockwisely</li>
         <li><kbd>R</kbd>: Rotate the palm counter-clockwisely</li>
         <li><kbd>↑</kbd>: Rise the arm</li>

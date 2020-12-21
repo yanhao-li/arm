@@ -115,7 +115,6 @@ const drawFinger2 = (angle) => {
 const draw = (g, mouse, angle) => {
   gl = g;
 
-  // Clear color and depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   matrix.model = drawBase(mouse);
   matrix.model = drawArm1(angle);
