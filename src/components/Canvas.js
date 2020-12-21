@@ -8,7 +8,7 @@ const Canvas = ({
   onMouseUp,
   onMouseDown,
   onMouseMove,
-  onMouseLeave
+  onMouseLeave,
 }) => {
   const canvasEl = useRef();
 

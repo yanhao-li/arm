@@ -41,7 +41,41 @@ const Arm = () => {
     // Set the clear color and enable the depth test
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
+    document.addEventListener("keydown", handleKeyDown);
     requestAnimationFrame(() => tick(gl, mouse));
+  }
+
+  const handleKeyDown = (e) => {
+    e.preventDefault();
+    const { keyCode } = e;
+    switch (keyCode) {
+      // up arrow
+      case 38:
+        break;
+      // down arrow
+      case 40:
+        break;
+      // right arrow
+      case 39:
+        break;
+      // left arrow
+      case 37:
+        break;
+      // r
+      case 82:
+        break;
+      // e
+      case 69:
+        break;
+      // a
+      case 65:
+        break;
+      // s
+      case 83:
+        break;
+      default:
+        break;
+    }
   }
 
   const handleMouseDown = (e) => {
